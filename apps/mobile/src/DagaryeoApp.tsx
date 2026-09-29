@@ -191,7 +191,13 @@ export function DagaryeoApp() {
 function HomeScreen({onPick}: {onPick: (source: 'camera' | 'library') => void}) {
   return (
     <ScrollView contentContainerStyle={styles.screen}>
-      <View style={styles.brandRow}><Text style={styles.logo}>◀▶</Text><Text style={styles.brand}>다가려</Text></View>
+      <View style={styles.brandBlock}>
+        <View style={styles.brandRow}>
+          <Image source={require('./assets/dagaryeo-app-icon.png')} style={styles.brandIcon} accessibilityLabel="다가려 앱 아이콘" />
+          <Text style={styles.brand}>다가려</Text>
+        </View>
+        <Text style={styles.brandDescription}>사진 속 개인정보를 찾아 확인하고 안전하게 가려주는 앱입니다.</Text>
+      </View>
       <View style={styles.privacyBanner}>
         <Text style={styles.bannerTitle}>파일은 기기에서 처리합니다</Text>
         <Text style={styles.body}>업로드 없이 이 기기에서 안전하게 분석합니다.</Text>
@@ -381,9 +387,11 @@ const styles = StyleSheet.create({
   centerText: {textAlign: 'center'},
   flex: {flex: 1},
   spacer: {flex: 1},
-  brandRow: {flexDirection: 'row', alignItems: 'center', gap: 8, marginVertical: spacing.md},
-  logo: {fontSize: 24, color: colors.primary, fontWeight: '900'},
+  brandBlock: {gap: spacing.sm, marginVertical: spacing.md},
+  brandRow: {flexDirection: 'row', alignItems: 'center', gap: spacing.md},
+  brandIcon: {width: 52, height: 52, borderRadius: 14},
   brand: {fontSize: 27, fontWeight: '800', color: colors.navy},
+  brandDescription: {fontSize: 14, lineHeight: 21, color: colors.muted},
   privacyBanner: {backgroundColor: colors.surfaceBlue, borderRadius: radius.md, padding: spacing.md},
   bannerTitle: {fontSize: 16, fontWeight: '700', color: colors.primaryDark, marginBottom: 4},
   title: {fontSize: 24, fontWeight: '800', color: colors.navy, marginTop: spacing.md},

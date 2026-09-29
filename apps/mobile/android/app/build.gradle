@@ -73,8 +73,21 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+// Release credentials are stored locally in android/local.properties.
+// That file and the release keystore are intentionally excluded from Git.
+def localSigningProperties = new Properties()
+def localSigningPropertiesFile = rootProject.file("local.properties")
+if (localSigningPropertiesFile.exists()) {
+    localSigningPropertiesFile.withInputStream { stream ->
+        localSigningProperties.load(stream)
+    }
+}
+
 def getSigningProperty = { name ->
     def value = project.findProperty(name)
+    if ((value == null || value.toString().trim().isEmpty()) && localSigningProperties.containsKey(name)) {
+        value = localSigningProperties.getProperty(name)
+    }
     if (value == null || value.toString().trim().isEmpty()) {
         value = System.getenv(name)
     }
@@ -121,9 +134,9 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file(getSigningProperty("SIGNED_STORE_FILE") ?: "missing-release-key.jks")
+            storeFile file(getSigningProperty("SIGNED_STORE_FILE") ?: "mir4love.jks")
             storePassword getSigningProperty("SIGNED_STORE_PASSWORD")
-            keyAlias getSigningProperty("SIGNED_KEY_ALIAS")
+            keyAlias getSigningProperty("SIGNED_KEY_ALIAS") ?: "mir4love"
             keyPassword getSigningProperty("SIGNED_KEY_PASSWORD")
         }
     }
