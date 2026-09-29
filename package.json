@@ -1,0 +1,21 @@
+{
+  "name": "dagaryeo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.11.0"
+  },
+  "scripts": {
+    "test": "pnpm --filter './packages/**' test",
+    "typecheck": "pnpm --filter './packages/**' typecheck && pnpm --filter @dagaryeo/mobile typecheck && pnpm --filter DagaryeoMac typecheck && pnpm --filter DagaryeoWindows typecheck",
+    "lint": "pnpm --filter @dagaryeo/mobile lint",
+    "mobile:start": "pnpm --dir apps/mobile start",
+    "mobile:ios": "pnpm --dir apps/mobile ios",
+    "mobile:android": "pnpm --dir apps/mobile android"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

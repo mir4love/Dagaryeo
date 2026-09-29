@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  '@shopify/react-native-skia': true
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - '@shopify/react-native-skia@2.13.1'
